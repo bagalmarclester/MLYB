@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Marc Lester - Developer Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script src="tailwind-config.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30">
+    <div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+        <div class="font-label-caps text-headline-md font-bold tracking-tighter text-primary cursor-pointer transition-all active:scale-95 hover:text-primary transition-colors duration-300">
+            ML_CORE_OS
+        </div>
+        <div class="hidden md:flex items-center gap-8 font-label-caps text-label-caps">
+            <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#about">About Me</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#stack">Stack</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer" href="#projects">Projects</a>
+        </div>
+        <div class="flex items-center">
+            <a href="https://github.com/bagalmarclester" target="_blank" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors duration-300 cursor-pointer flex items-center gap-2">
+                GitHub <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="relative pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-[1440px] mx-auto">
+    <div class="absolute inset-0 grid-bg z-0 pointer-events-none opacity-50"></div>
+    
+    <section class="relative z-10 min-h-[716px] flex flex-col justify-center gap-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+                <div class="font-label-caps text-label-caps text-primary-container flex items-center gap-3">
+                    <span class="w-2 h-2 bg-primary-container rounded-full animate-pulse"></span>
+                    [INIT_SEQUENCE] // IDENTITY_CONFIRMED: MARC_LESTER
+                </div>
+                <h1 class="font-headline-xl text-headline-xl text-primary tracking-tight md:text-[80px] md:leading-[88px]">
+                    Hi! <br class="hidden md:block"/>I am Marc Lester.
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Student-developer bridging the gap between front-end user experiences and high-level AI integration. Engineering systems that prioritize structural integrity, clean interfaces, and forward-thinking innovation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="Marc_Lester_Bagal_Resume.pdf" target="_blank" class="border border-primary-container text-primary-container px-8 py-4 font-label-caps text-label-caps rounded-DEFAULT transition-colors hover:bg-primary-container/10 text-center">
+                        Deploy_Resume.pdf
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5 flex justify-center lg:justify-end">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-primary-container/30 blur-xl rounded-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-xl overflow-hidden border border-primary-container/30 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                        <img src="ProperPicture.jpg" alt="Marc Lester" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="relative z-10 mt-section-gap">
+        <div class="font-label-caps text-label-caps text-on-surface-variant mb-12 flex items-center gap-4">
+            <span class="text-primary-container">// 01</span>
+            About Me
+            <div class="h-px bg-outline-variant/30 flex-grow ml-4"></div>
+        </div>
+        <div class="bento-card p-8 rounded-xl border border-outline-variant/30 glow-border">
+            <h2 class="font-headline-md text-3xl font-bold text-primary mb-4">Compiling the Human Experience.</h2>
+            <p class="font-body-md text-on-surface-variant leading-relaxed mb-4">
+                While I work with full-system architectures and integrate pretrained AI models, my primary role is often leading front-end development, where I focus on crafting intuitive, smooth, and engaging user interfaces.
+            </p>
+            <ul class="space-y-3 font-code-sm text-sm text-on-surface mt-6">
+                <li class="flex items-center gap-3">
+                    <span class="text-primary-container">-&gt;</span> Computer Science Student at the University of Mindanao
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="stack" class="relative z-10 mt-section-gap">
+        <div class="font-label-caps text-label-caps text-on-surface-variant mb-12 flex items-center gap-4">
+            <span class="text-primary-container">// 02</span>
+            My Tech Stack
+            <div class="h-px bg-outline-variant/30 flex-grow ml-4"></div>
+        </div>
+        <div class="flex flex-wrap gap-4">
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">JavaScript</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">HTML</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">CSS</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">React Native</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">PHP & Laravel</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">Python</div>
+            <div class="px-6 py-3 rounded-DEFAULT border border-outline-variant/30 bg-surface-container-low text-on-surface font-code-sm text-code-sm hover:border-primary-container hover:text-primary-container transition-colors cursor-default">Machine Learning Integration</div>
+        </div>
+        <div class="space-y-8 max-w-2xl mt-12">
+            <div>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-label-caps text-label-caps text-on-surface">Systems Engineering</span>
+                    <span class="font-code-sm text-code-sm text-primary-container">85%</span>
+                </div>
+                <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant/30">
+                    <div class="h-full bg-gradient-to-r from-primary-container to-primary" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-label-caps text-label-caps text-on-surface">Machine Learning</span>
+                    <span class="font-code-sm text-code-sm text-primary-container">78%</span>
+                </div>
+                <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden border border-outline-variant/30">
+                    <div class="h-full bg-gradient-to-r from-primary-container to-primary" style="width: 78%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="relative z-10 mt-section-gap">
+        <div class="font-label-caps text-label-caps text-on-surface-variant mb-12 flex items-center gap-4">
+            <span class="text-primary-container">// 03</span>
+            My Projects
+            <div class="h-px bg-outline-variant/30 flex-grow ml-4"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">WeatherWise</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">A weather application built with TypeScript for real-time weather tracking and forecasting.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/WeatherWise" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all md:mt-12 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">Gemma-4 AI Tutor App</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">An intelligent tutoring application powered by Gemma-4 AI for personalized learning experiences.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/Gemma-4-AI-tutor-app" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">Tanaman Dabaw Operations Management System</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">A comprehensive operations management system for Tanaman Dabaw to streamline local business operations.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/TanamanDabawOperationsManagementSystem" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all md:mt-12 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">Numerical Analysis</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">A Python-based numerical analysis toolkit for computational mathematics and algorithm implementations.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/NumericalAnalysis" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">Business Management System</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">A software engineering project for managing business operations and workflows efficiently.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/BusinessManagementSystem" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+            <div class="bento-card border border-outline-variant/30 p-6 rounded-xl overflow-hidden relative mb-6 glow-border transition-all md:mt-12 flex flex-col justify-between">
+                <div>
+                    <h3 class="font-headline-md text-headline-md text-primary mb-2">Student Outcome Prediction</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-6">A machine learning model predicting student outcomes based on academic and behavioral data analysis.</p>
+                </div>
+                <a href="https://github.com/bagalmarclester/StudentOutcomePrediction" target="_blank" class="text-primary-container font-code-sm text-sm hover:underline flex items-center gap-2 w-max">
+                    [VIEW_SOURCE] <span class="material-symbols-outlined text-[16px]">code</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center py-12 px-margin-mobile md:px-margin-desktop gap-gutter max-w-[1440px] mx-auto">
+        <div class="font-label-caps text-headline-md text-primary transition-transform hover:-translate-y-1">
+            ML_CORE_OS
+        </div>
+        <a href="https://github.com/bagalmarclester" target="_blank" class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary-container transition-colors duration-300">
+            © 2026 MARC LESTER // VIEW GITHUB
+        </a>
+    </div>
+</footer>
+</body>
+</html>
