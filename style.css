@@ -14,15 +14,57 @@ html {
 }
 
 /* Card Hover and Glass Effects */
+.glow-border {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
 .glow-border:hover {
-    box-shadow: inset 0 0 0 1px #00f0ff;
+    box-shadow: inset 0 0 0 1px #00f0ff, 0 10px 30px -10px rgba(0, 240, 255, 0.15);
+    transform: translateY(-3px);
 }
 
 .bento-card {
-    background: linear-gradient(135deg, rgba(23, 31, 51, 0.6) 0%, rgba(6, 14, 32, 0.8) 100%);
+    background: #111a2e;
     backdrop-filter: blur(12px);
-    border-top: 1px solid rgba(218, 226, 253, 0.1);
-    border-left: 1px solid rgba(218, 226, 253, 0.1);
+    border: 1px solid rgba(218, 226, 253, 0.12);
+}
+
+/* Project Card Transitions */
+.project-card {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card.hidden-card {
+    display: none !important;
+    opacity: 0;
+    transform: scale(0.96);
+}
+
+.project-card.fade-in {
+    animation: cardFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Typing Cursor */
+.typing-cursor {
+    display: inline-block;
+    animation: blink-anim 0.9s step-start infinite;
+}
+
+@keyframes blink-anim {
+    50% {
+        opacity: 0;
+    }
 }
 
 /* Pulse Glow */
