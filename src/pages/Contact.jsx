@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { personalInfo } from '../data/portfolioData';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -21,10 +22,25 @@ const EMAILJS_SERVICE_ID = 'service_hzn2mrm';   // e.g. 'service_abc123'
 const EMAILJS_TEMPLATE_ID = 'template_78tb7db';  // e.g. 'template_xyz456'
 const EMAILJS_PUBLIC_KEY = 'oqtm2jG_24NsfsK-R';   // e.g. 'aBcDeFgHiJkLmNoP'
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Cloudflare Turnstile Configuration
+// Get your free Site Key at: https://dash.cloudflare.com/?to=/:account/turnstile
+// 1. Add Widget: Domain = bagalmarclester.github.io (and localhost for local dev)
+// 2. Widget Mode = Managed (interactive "Verify you are human" checkbox)
+// 3. Paste your public Site Key below.
+//
+// Testing keys:
+//   - '3x00000000000000000000FF' : Forces interactive checkbox ("Verify you are human")
+//   - '1x00000000000000000000AA' : Always passes automatically
+// ─────────────────────────────────────────────────────────────────────────────
+const CLOUDFLARE_SITE_KEY = '0x4AAAAAAEhmFOE-iuTWyawD'; // Replace with your Turnstile Site Key (e.g. '0x4AAAAAA...')
+
 export default function Contact() {
   const formRef = useRef(null);
+  const turnstileRef = useRef(null);
   const [copied, setCopied] = useState(false);
   const [verified, setVerified] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
@@ -77,7 +93,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!verified) {
-      setErrorMsg('Please complete the verification check first.');
+      setErrorMsg('Please complete the Cloudflare verification check first.');
       return;
     }
     setErrorMsg('');
@@ -90,6 +106,7 @@ export default function Contact() {
       subject: formData.subject,
       message: formData.message || 'No message provided.',
       to_email: 'bagalmarclester@gmail.com',
+      'cf-turnstile-response': turnstileToken,
     };
 
     try {
@@ -100,16 +117,20 @@ export default function Contact() {
         EMAILJS_PUBLIC_KEY
       );
       setStatus('success');
-      // Reset after 5 seconds
       setTimeout(() => {
         setStatus('idle');
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
         setVerified(false);
+        setTurnstileToken('');
+        turnstileRef.current?.reset();
       }, 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
       setErrorMsg('Failed to send. Please email me directly at bagalmarclester@gmail.com');
+      turnstileRef.current?.reset();
+      setVerified(false);
+      setTurnstileToken('');
     }
   };
 
@@ -197,6 +218,19 @@ export default function Contact() {
               <p className="font-inter text-sm text-black/70 max-w-md">
                 Thank you for reaching out! I'll get back to you at <strong>{formData.email || 'your email'}</strong> within 24–48 hours.
               </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setStatus('idle');
+                  setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+                  setVerified(false);
+                  setTurnstileToken('');
+                  turnstileRef.current?.reset();
+                }}
+                className="mt-6 px-5 py-2.5 text-xs font-inter font-semibold border border-black/20 rounded-xl hover:bg-black hover:text-white transition-all cursor-pointer"
+              >
+                Send Another Message
+              </button>
             </div>
           ) : (
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
@@ -293,37 +327,29 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* Human Verification Box (Cloudflare Turnstile Style) */}
+              {/* Cloudflare Turnstile Verification */}
               <div className="pt-2">
-                <div
-                  onClick={() => setVerified(!verified)}
-                  className="inline-flex items-center justify-between gap-6 bg-[#222] text-white px-4 py-3 rounded-md cursor-pointer select-none border border-black/20 hover:bg-[#2a2a2a] transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${verified
-                        ? 'bg-[#3b82f6] border-[#3b82f6] text-white'
-                        : 'border-gray-400 bg-[#333]'
-                        }`}
-                    >
-                      {verified && (
-                        <span className="material-symbols-outlined text-[16px] font-bold">
-                          check
-                        </span>
-                      )}
-                    </div>
-                    <span className="font-inter text-xs font-medium">Verify you are human</span>
-                  </div>
-
-                  {/* Cloudflare logo mock */}
-                  <div className="flex flex-col items-end opacity-80 pl-4 border-l border-white/10">
-                    <div className="flex items-center gap-1 text-[9px] font-inter tracking-wider text-orange-400 font-bold uppercase">
-                      <span className="material-symbols-outlined text-[14px]">cloud</span>
-                      <span>Cloudflare</span>
-                    </div>
-                    <span className="text-[8px] text-gray-400">Privacy · Terms</span>
-                  </div>
-                </div>
+                <Turnstile
+                  ref={turnstileRef}
+                  siteKey={CLOUDFLARE_SITE_KEY}
+                  onSuccess={(token) => {
+                    setVerified(true);
+                    setTurnstileToken(token);
+                    setErrorMsg('');
+                  }}
+                  onExpire={() => {
+                    setVerified(false);
+                    setTurnstileToken('');
+                  }}
+                  onError={() => {
+                    setVerified(false);
+                    setTurnstileToken('');
+                  }}
+                  options={{
+                    theme: 'auto',
+                    size: 'normal',
+                  }}
+                />
               </div>
 
               {/* Error message */}
