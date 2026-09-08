@@ -34,7 +34,7 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'oqtm2jG_2
 //    EmailJS Dashboard -> Email Templates -> 'template_78tb7db' -> Settings tab ->
 //    Check 'Enable reCAPTCHA V2 verification' -> Paste your Secret Key -> Save.
 // ─────────────────────────────────────────────────────────────────────────────
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeHM7EtAAAAADBVMUdynix_Jfjq-5jXyl2FY3bC';
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LevN7EtAAAAAOyGvErZMRrhbVpMbmq7r71prOi8';
 
 export default function Contact() {
   const formRef = useRef(null);
