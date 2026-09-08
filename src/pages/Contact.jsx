@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { Turnstile } from '@marsidev/react-turnstile';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { personalInfo } from '../data/portfolioData';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -11,36 +11,37 @@ import { personalInfo } from '../data/portfolioData';
 // 4. Go to Account → API Keys → copy your Public Key
 //
 // Required Template Variables (use these exact names in your EmailJS template):
-//   {{from_name}}    - sender's name
-//   {{from_email}}   - sender's email
-//   {{phone}}        - sender's phone
-//   {{subject}}      - subject
-//   {{message}}      - message body
-//   {{to_email}}     - your email (bagalmarclester@gmail.com)
+//   {{from_name}}            - sender's name
+//   {{from_email}}           - sender's email
+//   {{phone}}                - sender's phone
+//   {{subject}}              - subject
+//   {{message}}              - message body
+//   {{to_email}}             - your email (bagalmarclester@gmail.com)
+//   {{g-recaptcha-response}} - Google reCAPTCHA response token
 // ─────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID = 'service_hzn2mrm';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'template_78tb7db';  // e.g. 'template_xyz456'
-const EMAILJS_PUBLIC_KEY = 'oqtm2jG_24NsfsK-R';   // e.g. 'aBcDeFgHiJkLmNoP'
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_hzn2mrm';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_78tb7db';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'oqtm2jG_24NsfsK-R';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Cloudflare Turnstile Configuration
-// Get your free Site Key at: https://dash.cloudflare.com/?to=/:account/turnstile
-// 1. Add Widget: Domain = bagalmarclester.github.io (and localhost for local dev)
-// 2. Widget Mode = Managed (interactive "Verify you are human" checkbox)
-// 3. Paste your public Site Key below.
-//
-// Testing keys:
-//   - '3x00000000000000000000FF' : Forces interactive checkbox ("Verify you are human")
-//   - '1x00000000000000000000AA' : Always passes automatically
+// Google reCAPTCHA v2 Configuration
+// 1. Go to: https://www.google.com/recaptcha/admin
+// 2. Label: Portfolio (or your choice)
+// 3. reCAPTCHA type: Challenge (v2) -> "I'm not a robot" Checkbox
+// 4. Domains: Add 'bagalmarclester.github.io' and 'localhost'
+// 5. Copy your public Site Key and paste into .env (VITE_RECAPTCHA_SITE_KEY)
+// 6. Copy your Secret Key and add it in EmailJS:
+//    EmailJS Dashboard -> Email Templates -> 'template_78tb7db' -> Settings tab ->
+//    Check 'Enable reCAPTCHA V2 verification' -> Paste your Secret Key -> Save.
 // ─────────────────────────────────────────────────────────────────────────────
-const CLOUDFLARE_SITE_KEY = '0x4AAAAAAEhmFOE-iuTWyawD'; // Replace with your Turnstile Site Key (e.g. '0x4AAAAAA...')
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LeHM7EtAAAAADBVMUdynix_Jfjq-5jXyl2FY3bC';
 
 export default function Contact() {
   const formRef = useRef(null);
-  const turnstileRef = useRef(null);
+  const recaptchaRef = useRef(null);
   const [copied, setCopied] = useState(false);
   const [verified, setVerified] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMsg, setErrorMsg] = useState('');
   const [formData, setFormData] = useState({
@@ -92,8 +93,8 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!verified) {
-      setErrorMsg('Please complete the Cloudflare verification check first.');
+    if (!verified || !recaptchaToken) {
+      setErrorMsg('Please complete the reCAPTCHA verification check first.');
       return;
     }
     setErrorMsg('');
@@ -106,7 +107,7 @@ export default function Contact() {
       subject: formData.subject,
       message: formData.message || 'No message provided.',
       to_email: 'bagalmarclester@gmail.com',
-      'cf-turnstile-response': turnstileToken,
+      'g-recaptcha-response': recaptchaToken,
     };
 
     try {
@@ -121,16 +122,16 @@ export default function Contact() {
         setStatus('idle');
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
         setVerified(false);
-        setTurnstileToken('');
-        turnstileRef.current?.reset();
+        setRecaptchaToken('');
+        recaptchaRef.current?.reset();
       }, 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
       setStatus('error');
-      setErrorMsg('Failed to send. Please email me directly at bagalmarclester@gmail.com');
-      turnstileRef.current?.reset();
+      setErrorMsg('Failed to send. Please ensure reCAPTCHA is verified or email me directly at bagalmarclester@gmail.com');
+      recaptchaRef.current?.reset();
       setVerified(false);
-      setTurnstileToken('');
+      setRecaptchaToken('');
     }
   };
 
@@ -224,8 +225,8 @@ export default function Contact() {
                   setStatus('idle');
                   setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
                   setVerified(false);
-                  setTurnstileToken('');
-                  turnstileRef.current?.reset();
+                  setRecaptchaToken('');
+                  recaptchaRef.current?.reset();
                 }}
                 className="mt-6 px-5 py-2.5 text-xs font-inter font-semibold border border-black/20 rounded-xl hover:bg-black hover:text-white transition-all cursor-pointer"
               >
@@ -247,6 +248,7 @@ export default function Contact() {
                   id="name"
                   name="name"
                   required
+                  maxLength={100}
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
@@ -265,6 +267,7 @@ export default function Contact() {
                   type="tel"
                   id="phone"
                   name="phone"
+                  maxLength={30}
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
@@ -284,6 +287,7 @@ export default function Contact() {
                   id="email"
                   name="email"
                   required
+                  maxLength={120}
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
@@ -303,6 +307,7 @@ export default function Contact() {
                   id="subject"
                   name="subject"
                   required
+                  maxLength={150}
                   value={formData.subject}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
@@ -321,33 +326,35 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows="5"
+                  maxLength={3000}
                   value={formData.message}
                   onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all resize-y"
                 ></textarea>
               </div>
 
-              {/* Cloudflare Turnstile Verification */}
-              <div className="pt-2">
-                <Turnstile
-                  ref={turnstileRef}
-                  siteKey={CLOUDFLARE_SITE_KEY}
-                  onSuccess={(token) => {
-                    setVerified(true);
-                    setTurnstileToken(token);
-                    setErrorMsg('');
+              {/* Google reCAPTCHA v2 Verification */}
+              <div className="pt-2 overflow-x-auto">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={RECAPTCHA_SITE_KEY}
+                  onChange={(token) => {
+                    if (token) {
+                      setVerified(true);
+                      setRecaptchaToken(token);
+                      setErrorMsg('');
+                    } else {
+                      setVerified(false);
+                      setRecaptchaToken('');
+                    }
                   }}
-                  onExpire={() => {
+                  onExpired={() => {
                     setVerified(false);
-                    setTurnstileToken('');
+                    setRecaptchaToken('');
                   }}
-                  onError={() => {
+                  onErrored={() => {
                     setVerified(false);
-                    setTurnstileToken('');
-                  }}
-                  options={{
-                    theme: 'auto',
-                    size: 'normal',
+                    setRecaptchaToken('');
                   }}
                 />
               </div>

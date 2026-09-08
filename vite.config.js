@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/MLYB/',
   server: {
-    host: true,
+    host: 'localhost',
     port: 5175,
   },
 })
