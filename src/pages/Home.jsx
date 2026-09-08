@@ -96,7 +96,7 @@ export default function Home() {
                 {/* Image Section */}
                 <div className="w-full h-48 bg-gray-100">
                   <img
-                    src={project.image || `https://placehold.co/600x400/eeeeee/999999?text=${project.title.replace(/ /g, '+')}`}
+                    src={project.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='22' fill='%239ca3af'%3EProject Preview%3C/text%3E%3C/svg%3E"}
                     alt={project.title}
                     className="w-full h-full object-cover object-top"
                   />

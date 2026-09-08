@@ -50,6 +50,7 @@ export default function Contact() {
     email: '',
     subject: '',
     message: '',
+    website: '', // Honeypot field for bot trapping
   });
 
   const copyEmail = () => {
@@ -93,6 +94,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Honeypot check: If a bot fills out the hidden field, silently reject
+    if (formData.website) {
+      setStatus('success');
+      return;
+    }
+
     if (!verified || !recaptchaToken) {
       setErrorMsg('Please complete the reCAPTCHA verification check first.');
       return;
@@ -101,11 +109,11 @@ export default function Contact() {
     setStatus('sending');
 
     const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      phone: formData.phone || 'Not provided',
-      subject: formData.subject,
-      message: formData.message || 'No message provided.',
+      from_name: formData.name.trim(),
+      from_email: formData.email.trim(),
+      phone: formData.phone.trim() || 'Not provided',
+      subject: formData.subject.trim(),
+      message: formData.message.trim() || 'No message provided.',
       to_email: 'bagalmarclester@gmail.com',
       'g-recaptcha-response': recaptchaToken,
     };
@@ -120,7 +128,7 @@ export default function Contact() {
       setStatus('success');
       setTimeout(() => {
         setStatus('idle');
-        setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', subject: '', message: '', website: '' });
         setVerified(false);
         setRecaptchaToken('');
         recaptchaRef.current?.reset();
@@ -235,6 +243,20 @@ export default function Contact() {
             </div>
           ) : (
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+              {/* Anti-bot Honeypot Field (invisible to users) */}
+              <div className="hidden" aria-hidden="true" style={{ display: 'none' }}>
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex="-1"
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={handleChange}
+                />
+              </div>
+
               {/* Name */}
               <div>
                 <label
