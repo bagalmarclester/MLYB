@@ -162,7 +162,7 @@ export default function Home() {
               {/* Small Image */}
               <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden shrink-0 border border-outline-variant/30 shadow-inner bg-gray-100">
                 <img
-                  src={personalInfo.avatarPath || 'ProperPicture.jpg'}
+                  src={personalInfo.avatarPath || '/images/ProperPicture.jpg'}
                   alt={personalInfo.name}
                   className="w-full h-full object-cover object-top"
                 />

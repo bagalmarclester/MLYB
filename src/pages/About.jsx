@@ -74,7 +74,7 @@ export default function About() {
             {/* Avatar Image (Uncropped & Full Proportions) */}
             <div className="w-full rounded-3xl overflow-hidden shadow-md bg-gray-100">
               <img
-                src={personalInfo.avatarPath || 'ProperPicture.jpg'}
+                src={personalInfo.avatarPath || '/images/ProperPicture.jpg'}
                 alt={personalInfo.name}
                 className="w-full h-auto object-contain block"
               />
