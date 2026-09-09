@@ -146,9 +146,9 @@ export default function Contact() {
   return (
     <div className="relative z-10 w-full">
       {/* Section Header */}
-      <div className="font-label-caps text-label-caps text-black mb-8 flex items-center gap-4">
+      <div className="font-inter text-xs font-bold uppercase tracking-wider text-on-surface mb-8 flex items-center gap-4">
         Contact
-        <div className="h-px bg-outline-variant/30 flex-grow ml-4"></div>
+        <div className="h-px bg-on-surface/20 flex-grow ml-4"></div>
       </div>
 
       {/* Main Layout */}
@@ -156,59 +156,60 @@ export default function Contact() {
         {/* Left Column: Email & Preferences */}
         <div className="w-full lg:w-[320px] shrink-0 flex flex-col gap-5">
           {/* Email Box */}
-          <div
+          <button
+            type="button"
             onClick={copyEmail}
-            className="border border-black rounded-2xl p-4 flex items-center gap-4 bg-transparent cursor-pointer hover:bg-black/[0.02] transition-colors group relative"
+            className="border border-on-surface rounded-2xl p-4 flex items-center gap-4 bg-transparent cursor-pointer hover:bg-on-surface/[0.03] transition-colors group relative w-full text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
             title="Click to copy email"
           >
-            <div className="w-10 h-10 rounded-xl border border-black/20 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-[20px] text-black">mail</span>
+            <div className="w-10 h-10 rounded-xl border border-on-surface/20 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[20px] text-on-surface">mail</span>
             </div>
             <div className="flex-1 min-w-0">
-              <span className="text-[11px] font-inter font-medium text-black/50 block leading-tight mb-0.5">
+              <span className="text-[11px] font-inter font-semibold text-on-surface/75 block leading-tight mb-0.5">
                 Email
               </span>
-              <span className="text-xs sm:text-sm font-inter font-bold text-black truncate block">
+              <span className="text-xs sm:text-sm font-inter font-bold text-on-surface truncate block">
                 {personalInfo.email}
               </span>
             </div>
             {copied && (
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-inter font-semibold bg-black text-white px-2 py-1 rounded">
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-inter font-semibold bg-on-surface text-surface px-2 py-1 rounded">
                 Copied!
               </span>
             )}
-          </div>
+          </button>
 
           {/* Preferences Card */}
-          <div className="border border-black rounded-2xl p-6 bg-transparent">
-            <h2 className="text-[11px] font-inter font-bold uppercase tracking-wider text-black/50 mb-6">
+          <div className="border border-on-surface rounded-2xl p-6 bg-transparent">
+            <h2 className="text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/75 mb-6">
               Preferences
             </h2>
 
             <div className="space-y-5 font-inter">
               <div>
-                <span className="text-xs text-black/50 font-medium block mb-1">
+                <span className="text-xs text-on-surface/75 font-semibold block mb-1">
                   Role-Type
                 </span>
-                <span className="text-sm font-bold text-black block">
+                <span className="text-sm font-bold text-on-surface block">
                   Full-Time / Contract
                 </span>
               </div>
 
               <div>
-                <span className="text-xs text-black/50 font-medium block mb-1">
+                <span className="text-xs text-on-surface/75 font-semibold block mb-1">
                   Work Setup
                 </span>
-                <span className="text-sm font-bold text-black block">
+                <span className="text-sm font-bold text-on-surface block">
                   Remote or On-Site
                 </span>
               </div>
 
               <div>
-                <span className="text-xs text-black/50 font-medium block mb-1">
+                <span className="text-xs text-on-surface/75 font-semibold block mb-1">
                   Engagement
                 </span>
-                <span className="text-sm font-bold text-black block">
+                <span className="text-sm font-bold text-on-surface block">
                   Freelance / Project-Based
                 </span>
               </div>
@@ -217,14 +218,14 @@ export default function Contact() {
         </div>
 
         {/* Right Column: Contact Form */}
-        <div className="w-full flex-1 border border-black rounded-2xl md:rounded-3xl p-6 md:p-8 bg-transparent">
+        <div className="w-full flex-1 border border-on-surface rounded-2xl md:rounded-3xl p-6 md:p-8 bg-transparent">
           {status === 'success' ? (
             <div className="py-16 flex flex-col items-center justify-center text-center">
-              <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-on-surface text-surface flex items-center justify-center mb-4">
                 <span className="material-symbols-outlined text-3xl">check</span>
               </div>
-              <h3 className="font-fraunces text-2xl font-bold text-black mb-2">Message Sent!</h3>
-              <p className="font-inter text-sm text-black/70 max-w-md">
+              <h3 className="font-fraunces text-2xl font-bold text-on-surface mb-2">Message Sent!</h3>
+              <p className="font-inter text-sm text-on-surface/75 max-w-md">
                 Thank you for reaching out! I'll get back to you at <strong>{formData.email || 'your email'}</strong> within 24–48 hours.
               </p>
               <button
@@ -236,7 +237,7 @@ export default function Contact() {
                   setRecaptchaToken('');
                   recaptchaRef.current?.reset();
                 }}
-                className="mt-6 px-5 py-2.5 text-xs font-inter font-semibold border border-black/20 rounded-xl hover:bg-black hover:text-white transition-all cursor-pointer"
+                className="mt-6 px-5 py-2.5 min-h-[44px] text-xs font-inter font-semibold border border-on-surface/20 rounded-xl hover:bg-on-surface hover:text-surface transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
               >
                 Send Another Message
               </button>
@@ -261,7 +262,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-black/70 mb-1.5"
+                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/80 mb-1.5"
                 >
                   Name
                 </label>
@@ -273,7 +274,7 @@ export default function Contact() {
                   maxLength={100}
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
+                  className="w-full min-h-[44px] px-4 py-3 rounded-lg border border-on-surface/20 bg-on-surface/[0.02] focus:bg-surface focus:border-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface text-on-surface font-inter text-sm transition-all"
                 />
               </div>
 
@@ -281,7 +282,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="phone"
-                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-black/70 mb-1.5"
+                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/80 mb-1.5"
                 >
                   Phone Number
                 </label>
@@ -292,7 +293,7 @@ export default function Contact() {
                   maxLength={30}
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
+                  className="w-full min-h-[44px] px-4 py-3 rounded-lg border border-on-surface/20 bg-on-surface/[0.02] focus:bg-surface focus:border-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface text-on-surface font-inter text-sm transition-all"
                 />
               </div>
 
@@ -300,7 +301,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-black/70 mb-1.5"
+                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/80 mb-1.5"
                 >
                   Email
                 </label>
@@ -312,7 +313,7 @@ export default function Contact() {
                   maxLength={120}
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
+                  className="w-full min-h-[44px] px-4 py-3 rounded-lg border border-on-surface/20 bg-on-surface/[0.02] focus:bg-surface focus:border-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface text-on-surface font-inter text-sm transition-all"
                 />
               </div>
 
@@ -320,7 +321,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-black/70 mb-1.5"
+                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/80 mb-1.5"
                 >
                   Subject
                 </label>
@@ -332,7 +333,7 @@ export default function Contact() {
                   maxLength={150}
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all"
+                  className="w-full min-h-[44px] px-4 py-3 rounded-lg border border-on-surface/20 bg-on-surface/[0.02] focus:bg-surface focus:border-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface text-on-surface font-inter text-sm transition-all"
                 />
               </div>
 
@@ -340,7 +341,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-black/70 mb-1.5"
+                  className="block text-[11px] font-inter font-bold uppercase tracking-wider text-on-surface/80 mb-1.5"
                 >
                   Your Message (Optional)
                 </label>
@@ -351,34 +352,36 @@ export default function Contact() {
                   maxLength={3000}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-black/15 bg-black/[0.02] focus:bg-white focus:border-black focus:outline-none text-black font-inter text-sm transition-all resize-y"
+                  className="w-full min-h-[120px] px-4 py-3 rounded-lg border border-on-surface/20 bg-on-surface/[0.02] focus:bg-surface focus:border-on-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface text-on-surface font-inter text-sm transition-all resize-y"
                 ></textarea>
               </div>
 
               {/* Google reCAPTCHA v2 Verification */}
-              <div className="pt-2 overflow-x-auto">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={RECAPTCHA_SITE_KEY}
-                  onChange={(token) => {
-                    if (token) {
-                      setVerified(true);
-                      setRecaptchaToken(token);
-                      setErrorMsg('');
-                    } else {
+              <div className="pt-2 w-full max-w-full overflow-hidden flex justify-start">
+                <div className="origin-top-left transition-transform max-w-full scale-[0.86] min-[360px]:scale-95 sm:scale-100">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    onChange={(token) => {
+                      if (token) {
+                        setVerified(true);
+                        setRecaptchaToken(token);
+                        setErrorMsg('');
+                      } else {
+                        setVerified(false);
+                        setRecaptchaToken('');
+                      }
+                    }}
+                    onExpired={() => {
                       setVerified(false);
                       setRecaptchaToken('');
-                    }
-                  }}
-                  onExpired={() => {
-                    setVerified(false);
-                    setRecaptchaToken('');
-                  }}
-                  onErrored={() => {
-                    setVerified(false);
-                    setRecaptchaToken('');
-                  }}
-                />
+                    }}
+                    onErrored={() => {
+                      setVerified(false);
+                      setRecaptchaToken('');
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Error message */}
@@ -394,7 +397,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full bg-black text-white font-inter font-semibold py-3.5 px-6 rounded-xl hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer text-center text-sm flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="w-full min-h-[44px] bg-on-surface text-surface font-inter font-semibold py-3.5 px-6 rounded-xl hover:opacity-90 active:scale-[0.99] transition-all cursor-pointer text-center text-sm flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-on-surface focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
                 >
                   {status === 'sending' ? (
                     <>
@@ -404,7 +407,7 @@ export default function Contact() {
                       </svg>
                       Sending...
                     </>
-                  ) : 'Submit'}
+                  ) : 'Send Message'}
                 </button>
               </div>
             </form>
