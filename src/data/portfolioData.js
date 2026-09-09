@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Marc Lester Bagal",
   role: "Front-End Developer & AI Integration Builder",
-  systemId: "ML_CORE_OS",
+  systemId: "M.Bagal",
   version: "v3.0_REACT",
   education: "B.S. in Computer Science @ University of Mindanao",
   location: "Davao City, Philippines",
@@ -202,8 +202,8 @@ export const projects = [
     tags: ["Next.js", "React", "JavaScript", "REST APIs", "Team Collab"],
     category: "web",
     image: "event-registration.png",
-    link: "https://github.com/bagalmarclester",
-    linkLabel: "View Source",
+    link: "https://register.rypaci.com/",
+    linkLabel: "View Live",
     linkIcon: "groups",
   },
   {
