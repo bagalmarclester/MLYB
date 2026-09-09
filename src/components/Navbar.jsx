@@ -14,10 +14,10 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { to: '/', label: 'Home', number: '01' },
-    { to: '/about', label: 'About', number: '02' },
-    { to: '/skills', label: 'Skills', number: '03' },
-    { to: '/projects', label: 'Projects', number: '04' },
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/skills', label: 'Skills' },
+    { to: '/projects', label: 'Projects' },
   ];
 
   return (
@@ -85,7 +85,7 @@ export default function Navbar() {
                   }`
                 }
               >
-                <span>{`${link.number} ${link.label}`}</span>
+                <span>{link.label}</span>
                 <span className="material-symbols-outlined text-sm">chevron_right</span>
               </NavLink>
             ))}
