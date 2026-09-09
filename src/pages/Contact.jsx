@@ -149,7 +149,7 @@ export default function Contact() {
       <div className="font-inter text-xs font-bold uppercase tracking-wider text-on-surface mb-8 flex items-center gap-4">
         Contact
         <div className="h-px bg-on-surface/20 flex-grow ml-4"></div>
-      </div>Proceed with fixing all reported After-Mode violations in src/components/Navbar.jsx and src/pages/Contact.jsx:
+      </div>
 
       {/* Main Layout */}
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start w-full">
