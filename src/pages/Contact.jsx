@@ -19,22 +19,22 @@ import { personalInfo } from '../data/portfolioData';
 //   {{to_email}}             - your email (bagalmarclester@gmail.com)
 //   {{g-recaptcha-response}} - Google reCAPTCHA response token
 // ─────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_hzn2mrm';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_78tb7db';
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'oqtm2jG_24NsfsK-R';
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Google reCAPTCHA v2 Configuration
 // 1. Go to: https://www.google.com/recaptcha/admin
 // 2. Label: Portfolio (or your choice)
 // 3. reCAPTCHA type: Challenge (v2) -> "I'm not a robot" Checkbox
-// 4. Domains: Add 'bagalmarclester.github.io' and 'localhost'
+// 4. Domains: Add your production domains and 'localhost'
 // 5. Copy your public Site Key and paste into .env (VITE_RECAPTCHA_SITE_KEY)
 // 6. Copy your Secret Key and add it in EmailJS:
-//    EmailJS Dashboard -> Email Templates -> 'template_78tb7db' -> Settings tab ->
+//    EmailJS Dashboard -> Email Templates -> your template -> Settings tab ->
 //    Check 'Enable reCAPTCHA V2 verification' -> Paste your Secret Key -> Save.
 // ─────────────────────────────────────────────────────────────────────────────
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '6LevN7EtAAAAAOyGvErZMRrhbVpMbmq7r71prOi8';
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
 export default function Contact() {
   const formRef = useRef(null);
@@ -105,6 +105,13 @@ export default function Contact() {
       setErrorMsg('Please complete the reCAPTCHA verification check first.');
       return;
     }
+
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      setStatus('error');
+      setErrorMsg('Contact service is temporarily unconfigured. Please email me directly at ' + personalInfo.email);
+      return;
+    }
+
     setErrorMsg('');
     setStatus('sending');
 
@@ -134,7 +141,9 @@ export default function Contact() {
         recaptchaRef.current?.reset();
       }, 5000);
     } catch (err) {
-      console.error('EmailJS error:', err);
+      if (import.meta.env.DEV) {
+        console.error('EmailJS error:', err);
+      }
       setStatus('error');
       setErrorMsg('Failed to send. Please ensure reCAPTCHA is verified or email me directly at bagalmarclester@gmail.com');
       recaptchaRef.current?.reset();
