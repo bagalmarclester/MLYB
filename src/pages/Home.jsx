@@ -1,36 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { personalInfo, typingPhrases, projects, skillDomains } from '../data/portfolioData';
+import { personalInfo, projects } from '../data/portfolioData';
 
 export default function Home() {
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentPhrase = typingPhrases[phraseIndex];
-    const typingSpeed = isDeleting ? 40 : 80;
-
-    const timer = setTimeout(() => {
-      if (!isDeleting && text === currentPhrase) {
-        // Pause at end of word
-        setTimeout(() => setIsDeleting(true), 1800);
-      } else if (isDeleting && text === '') {
-        // Move to next word
-        setIsDeleting(false);
-        setPhraseIndex((prev) => (prev + 1) % typingPhrases.length);
-      } else {
-        // Type or delete a char
-        const nextText = isDeleting
-          ? currentPhrase.substring(0, text.length - 1)
-          : currentPhrase.substring(0, text.length + 1);
-        setText(nextText);
-      }
-    }, typingSpeed);
-
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, phraseIndex]);
-
   return (
     <div className="relative z-10 w-full">
       {/* Hero Section */}
@@ -98,6 +70,7 @@ export default function Home() {
                   <img
                     src={project.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='100%25' height='100%25' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='22' fill='%239ca3af'%3EProject Preview%3C/text%3E%3C/svg%3E"}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
@@ -164,6 +137,7 @@ export default function Home() {
                 <img
                   src={personalInfo.avatarPath || '/images/ProperPicture.jpg'}
                   alt={personalInfo.name}
+                  loading="lazy"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
