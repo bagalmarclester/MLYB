@@ -27,13 +27,16 @@
     <meta property="twitter:description" content="Student-developer bridging front-end UX and AI integration. Computer Science @ University of Mindanao.">
     <meta property="twitter:image" content="https://iam.mlyb.site.je/images/ProperPicture.jpg">
     
-    <!-- Typography & Icons -->
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700;800;900&family=Hanken+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <script type="module" crossorigin src="/assets/index-CQUwhCRi.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Ct1KYo7z.css">
+    <!-- Typography & Icons (Non-render-blocking) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" media="print" onload="this.media='all'"/>
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"/>
+    </noscript>
+  <script type="module" crossorigin src="/assets/index-V5uk-LYm.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DeJamG1T.css">
 </head>
 <body class="bg-surface text-on-surface antialiased overflow-x-hidden">
     <div id="root"></div>
